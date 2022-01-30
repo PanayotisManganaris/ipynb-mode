@@ -1,0 +1,58 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: README
+#+date: <2022-01-30 Sun>
+#+author: panos@ASCALON
+#+email: panos.manganaris@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.0.50 (Org mode 9.5.2)
+#+cite_export:
+* objectives
+programming language -- is (IDEALLY) anything that the jupyter server can provide kernels for
+
+to start with, python rules will define:
+- the syntax of expressions
+- the customary rules for indentation
+- how to do syntax highlighting for the language
+- how to find the beginning or end of a function definition.
+* design notes
+This is my first mode. It's made by following [[https://www.emacswiki.org/emacs/ModeTutorial][ScottAndrewBorton]]'s major mode tutorial.
+** keymap
+Probably very lightweight. The point is to just enable ipynb files
+to be interacted with using existing robust interfaces made for
+jupyter kernels and org documents
+- consider using 'make-sparse-keymap
+** font locking
+don't know where to begin
+
+need to use the font locking appropriate for the given language. language is only constrained by jupyter's kernel support.
+
+
+
+* the ipython notebook
+the objective of this mode is to edit ipynb files as if they're
+lightweight markup. specifically org files with src blocks.
+
+It literally displays the ipynb as an org file and then lets you use
+your literate programing engine of choice to leverage them within
+emacs.
+
+* Wishlist
+** TODO kernel integration via emacs-jupyter 
+maybe this can be done generally enough to alloy ob-ipython users to enjoy this as well
+
+** TODO display a ,ipynb as if it's a .org
+make it seamless.
+
+ob course, anybody who actually uses emacs can just use org, but collaboration is a necessary evil.
+** TODO find the best way to go between ipynb and org and provide dandy option to do so
+pandoc directly?
+jupyter nb convert?
+ox-ipynb?
+
+for sharing
