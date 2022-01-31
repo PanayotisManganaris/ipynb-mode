@@ -12,36 +12,112 @@
 #+exclude_tags: noexport
 #+creator: Emacs 29.0.50 (Org mode 9.5.2)
 #+cite_export:
-* objectives
-programming language -- is (IDEALLY) anything that the jupyter server can provide kernels for
+* Objectives
+The objective of this mode is to edit ipynb files as if they're
+lightweight markup. Specifically org files with src blocks.
+
+Ideally this will free the user from the jupyter development
+environment while allowing him to create user facing jupyter notebooks
+that retain all their democratic accessibility.
+
+ideally the functionality of native .org documents will be preserved
+including even permitting the user to use a literate programing engine
+of his choice to run the notebook within emacs.
+
+emacs-jupyter is my first priority
+* Language Support
+programming language is (IDEALLY) anything that the jupyter server
+can provide kernels for
 
 to start with, python rules will define:
 - the syntax of expressions
 - the customary rules for indentation
 - how to do syntax highlighting for the language
 - how to find the beginning or end of a function definition.
-* design notes
-This is my first mode. It's made by following [[https://www.emacswiki.org/emacs/ModeTutorial][ScottAndrewBorton]]'s major mode tutorial.
+* Design Notes
+This is my first mode. It's made by following [[https://www.emacswiki.org/emacs/ModeTutorial][ScottAndrewBorton]]'s
+major mode tutorial.
 ** keymap
 Probably very lightweight. The point is to just enable ipynb files
 to be interacted with using existing robust interfaces made for
 jupyter kernels and org documents
-- consider using 'make-sparse-keymap
+- consider 'make-sparse-keymap
 ** font locking
 don't know where to begin
 
-need to use the font locking appropriate for the given language. language is only constrained by jupyter's kernel support.
+need to use the font locking appropriate for the given
+language. language is ideally only constrained by jupyter's kernel
+support.
+** parsing ipynb json into an org mode virtual buffer?
+for "markdown" cells and "code" cell_type.
+- ignore execution counts
+- maybe use metadata as tags
+- "summarize" outputs
+- source -- pass to org mode representation
+*** output summary stratagy
+put inline displays (html tables, images, widgets, etc) in a dummy result block...
 
+1. images will be a placeholder. real images will be displayed by org
+   machinery when cell is run natively
+2. widgets may or may not be handled by emacs jupyter
+3. tables should be rendered as org tables... maybe if they're really
+   big they should be truncated after a few rows and user should be
+   warned
 
+* Understanding the ipynb format
+The .ipynb file is encoded in JSON (JavaScript Object Notation). A
+type of heavy markup language.
 
-* the ipython notebook
-the objective of this mode is to edit ipynb files as if they're
-lightweight markup. specifically org files with src blocks.
+The language looks like a python dictionary.
 
-It literally displays the ipynb as an org file and then lets you use
-your literate programing engine of choice to leverage them within
-emacs.
-
+** preexisting javascript and json modes
+these modes are intended for interactive serialization of data using
+the JSON format.
+- built-in :: Edward O'Connor's json.el 
+- Steve Yegge's js2-mode
+** ipynb sample
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "A line of markdown plain-text markup."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "line of python code\n",
+    "another line of python code\n",
+   ]
+  }
+ ]
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
 * Wishlist
 ** TODO kernel integration via emacs-jupyter 
 maybe this can be done generally enough to alloy ob-ipython users to enjoy this as well
