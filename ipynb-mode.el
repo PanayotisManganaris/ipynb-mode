@@ -12,7 +12,19 @@
 ;; autoload
 (add-to-list 'auto-mode-alist '("\\.ipynb\\'" . ipynb-mode))
 
-;; parse ipynb json
+;;; lesson learned from json.el:
+;; the decoding/encoding should optimally manipulate a buffer rather
+;; than a string.
+
+;; Parameters
+
+;; Error Conditions
+
+;; parse ipynb json -- adapted from emacs's json.el json-pretty-print
+(defun read-ipynb ()
+  "Read the ipynb buffer contents using json-read-file and return alist object"
+  (interactive "p")
+  json-read-file(buffer-file-name))
 
 ;; font-locking
 

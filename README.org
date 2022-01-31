@@ -73,7 +73,7 @@ The language looks like a python dictionary.
 ** preexisting javascript and json modes
 these modes are intended for interactive serialization of data using
 the JSON format.
-- built-in :: Edward O'Connor's json.el 
+- Edward O'Connor's json.el 
 - Steve Yegge's js2-mode
 ** ipynb sample
 {
